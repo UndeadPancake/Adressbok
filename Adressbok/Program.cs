@@ -3,25 +3,46 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace Adressbok
 {
     class Program
     {
-        class Person
+        public class Person
         {
-            static public string namn;
-            static public string adress;
-            static public string phone;
-            static public string email;
+            //Konstruktor tagen från https://stackoverflow.com/questions/8391885/storing-data-into-list-with-class
+            public string namn { set; get; }
+            public string adress { set; get; }
+            public string phone { set; get; }
+            public string email { set; get; }
         }
         static void Main(string[] args)
         {
+            string inputNamn;
+            string inputAdress;
+            string inputPhone;
+            string inputEmail;
+            string input;
+            List<Person> people = new List<Person>();
             Console.WriteLine("Välkommen till programmet.");
-            string input = Console.ReadLine();
             do
             {
                 input = Console.ReadLine();
+                if (input == "ny")
+                {
+                    Console.Write("Vad heter personen du vill lägga till:");
+                    inputNamn = Console.ReadLine();
+                    Console.Write("Vart bor personen du vill lägga till:");
+                    inputAdress = Console.ReadLine();
+                    Console.Write("Vad är personens telefonnummer:");
+                    inputPhone = Console.ReadLine();
+                    Console.Write("Vad är personens e-mail:");
+                    inputEmail = Console.ReadLine();
+                    people.Add(new Person { namn = inputNamn, adress = inputAdress, phone = inputPhone, email = inputEmail });
+                    Console.Write(people[0].namn + people[0].adress + people[0].phone + people[0].email);
+                    Console.WriteLine();
+                }
             } while (input != "sluta");
         }
     }
