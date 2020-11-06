@@ -8,6 +8,13 @@ namespace Adressbok
 {
     class Program
     {
+        class Person
+        {
+            static public string namn;
+            static public string adress;
+            static public string phone;
+            static public string email;
+        }
         static void Main(string[] args)
         {
             Console.WriteLine("Välkommen till programmet.");
