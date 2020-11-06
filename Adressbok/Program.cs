@@ -28,6 +28,7 @@ namespace Adressbok
             Console.WriteLine("Välkommen till programmet.");
             do
             {
+                Console.Write(">");
                 input = Console.ReadLine();
                 if (input == "ny")
                 {
@@ -40,8 +41,14 @@ namespace Adressbok
                     Console.Write("Vad är personens e-mail:");
                     inputEmail = Console.ReadLine();
                     people.Add(new Person { namn = inputNamn, adress = inputAdress, phone = inputPhone, email = inputEmail });
-                    Console.Write(people[0].namn + people[0].adress + people[0].phone + people[0].email);
-                    Console.WriteLine();
+                }
+                else if (input == "visa")
+                {
+                    for (int i = 0; i < people.Count; i++)
+                    {
+                        Console.Write($"{people[i].namn} {people[i].adress} {people[i].phone} {people[i].email}");
+                        Console.WriteLine();
+                    }
                 }
             } while (input != "sluta");
         }
