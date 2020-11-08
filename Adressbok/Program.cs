@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -20,14 +21,11 @@ namespace Adressbok
         }
         static void Main(string[] args)
         {
-            string inputNamn;
-            string inputAdress;
-            string inputPhone;
-            string inputEmail;
             string input;
             List<Person> people = new List<Person>();
             string[] transfer = File.ReadAllLines(@"C:\Users\Dator 1\Adressbok.txt");
-            for (int i = 0; i < transfer.Length; i += 4)
+            string[] toFile = new string[4];
+            for (int i = 0; i < transfer.Length - 1; i += 4)
             {
                 people.Add(new Person { namn = transfer[i], adress = transfer[i + 1], phone = transfer[i + 2], email = transfer[i + 3] });
             }
@@ -39,20 +37,21 @@ namespace Adressbok
                 if (input == "ny")
                 {
                     Console.Write("Vad heter personen du vill lägga till:");
-                    inputNamn = Console.ReadLine();
+                    toFile[0] = Console.ReadLine();
                     Console.Write("Vart bor personen du vill lägga till:");
-                    inputAdress = Console.ReadLine();
+                    toFile[1] = Console.ReadLine();
                     Console.Write("Vad är personens telefonnummer:");
-                    inputPhone = Console.ReadLine();
+                    toFile[2] = Console.ReadLine();
                     Console.Write("Vad är personens e-mail:");
-                    inputEmail = Console.ReadLine();
-                    people.Add(new Person { namn = inputNamn, adress = inputAdress, phone = inputPhone, email = inputEmail });
+                    toFile[3] = Console.ReadLine();
+                    people.Add(new Person { namn = toFile[0], adress = toFile[1], phone = toFile[2], email = toFile[3] });
+                    File.AppendAllLines(@"C:\Users\Dator 1\Adressbok.txt", toFile);
                 }
                 else if (input == "visa")
                 {
                     for (int i = 0; i < people.Count; i++)
                     {
-                        Console.Write($"{people[i].namn} {people[i].adress} {people[i].phone} {people[i].email}");
+                        Console.Write($"{people[i].namn}, {people[i].adress}, {people[i].phone}, {people[i].email}.");
                         Console.WriteLine();
                     }
                 }
