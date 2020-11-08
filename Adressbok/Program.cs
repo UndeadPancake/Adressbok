@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,6 +26,11 @@ namespace Adressbok
             string inputEmail;
             string input;
             List<Person> people = new List<Person>();
+            string[] transfer = File.ReadAllLines(@"C:\Users\Dator 1\Adressbok.txt");
+            for (int i = 0; i < transfer.Length; i += 4)
+            {
+                people.Add(new Person { namn = transfer[i], adress = transfer[i + 1], phone = transfer[i + 2], email = transfer[i + 3] });
+            }
             Console.WriteLine("Välkommen till programmet.");
             do
             {
@@ -51,6 +57,7 @@ namespace Adressbok
                     }
                 }
             } while (input != "sluta");
+            Console.WriteLine("Hej då!");
         }
     }
 }
