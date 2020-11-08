@@ -21,6 +21,7 @@ namespace Adressbok
         }
         static void Main(string[] args)
         {
+            File.WriteAllText(@"C:\Users\Dator 1\Adressbok.txt", "");
             string input;
             int remove;
             List<Person> people = new List<Person>();
@@ -52,7 +53,7 @@ namespace Adressbok
                 {
                     for (int i = 0; i < people.Count; i++)
                     {
-                        Console.Write($"{people[i].namn}, {people[i].adress}, {people[i].phone}, {people[i].email}.");
+                        Console.Write($"{i + 1}.{people[i].namn}, {people[i].adress}, {people[i].phone}, {people[i].email}.");
                         Console.WriteLine();
                     }
                 }
@@ -60,6 +61,7 @@ namespace Adressbok
                 {
                     Console.Write("Vilken person vill du ta ut ur din adressbok:");
                     remove = int.Parse(Console.ReadLine());
+                    remove -= 1;
                     people.RemoveAt(remove);
                     string[] newFile = new string[people.Count * 4];
                     Person[] middleMan = new Person[people.Count];
@@ -81,6 +83,10 @@ namespace Adressbok
                         newFile[i] = middleMan[i / 4].email;
                     }
                     File.WriteAllLines(@"C:\Users\Dator 1\Adressbok.txt", newFile);
+                }
+                else if (input != "sluta")
+                {
+                    Console.WriteLine("Okänt kommando.");
                 }
             } while (input != "sluta");
             Console.WriteLine("Hej då!");
